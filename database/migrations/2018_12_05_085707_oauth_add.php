@@ -14,6 +14,7 @@ class OauthAdd extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->string('username',45)->after('name');
             $table->string('email')->nullable()->change();
             $table->string('password')->nullable()->change();
         });

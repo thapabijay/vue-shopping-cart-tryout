@@ -15,10 +15,13 @@ use Illuminate\Http\Request;
 
 Route::namespace('Api')->group(function () {
     Route::get('/users', function () {
-        return App\Http\Resources\UserResource::collection(\DB::table('bl_details')->paginate(10));
+        return response()->json(array('code' =>  401,'message' => "No authentication"), 404);
+        //return App\Http\Resources\UserResource::collection(\DB::table('bl_details')->paginate(10));
     });
     Route::get('/photos', 'HomeController@getPhotos');
 });
+
+Auth::routes();
 
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

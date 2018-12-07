@@ -32,10 +32,22 @@ require('./bootstrap');
 //     el: '#app'
 // });
 
-import Vue from 'vue';
+import Vue from 'vue'
 
 import App from './views/App';
 import router from "./router";
+
+import VeeValidate from 'vee-validate';
+
+Vue.use(VeeValidate);
+
+Vue.prototype.$http = axios
+
+import authStore from './store'
+
+Vue.component('passport-clients', require('./components/passport/Clients.vue'));
+Vue.component('passport-authorized-clients', require('./components/passport/AuthorizedClients.vue'));
+Vue.component('passport-personal-access-tokens', require('./components/passport/PersonalAccessTokens.vue'));
 
 import Default from "./layouts/Default.vue";
 
@@ -43,6 +55,7 @@ Vue.component("default-layout", Default);
 
 const app = new Vue({
     el: '#app',
-    router,
+    store:authStore,
+    router,    
     render: h => h(App),    
 });

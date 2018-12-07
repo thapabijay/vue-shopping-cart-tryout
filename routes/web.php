@@ -11,13 +11,12 @@
 |
 */
 
-Route::get('auth/social', 'AuthSocialAuthController@show')->name('social.login');
 Route::get('oauth/{provider}', 'AuthSocialAuthController@redirectToProvider')->name('social.oauth');
 Route::get('oauth/{provider}/callback', 'AuthSocialAuthController@handleProviderCallback')->name('social.callback');
 
 
 
-Auth::routes();
+//Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
 

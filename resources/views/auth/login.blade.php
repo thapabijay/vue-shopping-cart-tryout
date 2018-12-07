@@ -67,9 +67,9 @@
                     </form>
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
-                            <a href="{{ url('/auth/gmail') }}" class="btn btn-gmail"><i class="fa fa-gmail"></i> Gmail</a>
-                            <a href="{{ url('/auth/twitter') }}" class="btn btn-twitter"><i class="fa fa-twitter"></i> Twitter</a>
-                            <a href="{{ url('/auth/facebook') }}" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
+                            <passport-clients></passport-clients>
+                            <passport-authorized-clients></passport-authorized-clients>
+                            <passport-personal-access-tokens></passport-personal-access-tokens>
                         </div>
                     </div>
                 </div>

@@ -10486,3 +10486,7 @@ nav.navbar-custom {
   height: 400px;
 }
 
+.navbar-nav .nav-link {
+  color: white !important;
+}
+

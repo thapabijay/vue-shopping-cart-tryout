@@ -15,12 +15,20 @@
             }
         },
         created() {
-            // nothing defined here (when this.$route.path is other than "/")
-            console.log(this.$route, this.$route.meta.layout);
+            let store=this.$store;
+            store.dispatch('checkLogin');
+            this.$http.interceptors.response.use(undefined, function (err) {
+                return new Promise(function (resolve, reject) {
+                    if (err.response.status === 401 && err.config && !err.config.__isRetryRequest) {
+                        store.dispatch('logout')
+                    }
+                    reject(err);
+                });
+            });
         },
         updated() {
             // something defined here whatever the this.$route.path
-            console.log(this.$route, this.$route.meta.layout);
+            //console.log(this.$route, this.$route.meta.layout);
         }
     };
 </script>

@@ -35,7 +35,7 @@ const getUsers = (page, callback) => {
         .then(response => {
             callback(null, response.data);
         }).catch(error => {
-            callback(error, error.response.data);
+            callback(error, error);
         });
 };
 
