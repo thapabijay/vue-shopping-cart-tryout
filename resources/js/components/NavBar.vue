@@ -28,12 +28,24 @@
                     <router-link class="nav-link" to="/login">Login</router-link>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-shopping-cart"></i>
+                    <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="cart-list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-shopping-cart"></i> {{cartItemCount}}
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
+                    <div v-if="!cartItems || cartItems.length==0" class="dropdown-menu dropdown-menu-right" aria-labelledby="cart-list">
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item">No Item</a>
+                    </div>
+                    <div v-else class="dropdown-menu dropdown-menu-right" aria-labelledby="cart-list">
+                        <div class="dropdown-divider"></div>
+                        <table class="table table-sm table-condensed table-striped">
+                            <tr v-for="{id,name,quantity,amount,img_url} in cartItems">
+                                <td>{{name}}</td>
+                                <td>{{quantity}}</td>
+                                <td>{{amount}}</td>
+                                <td><i class="fas fa-trash-alt" @click="removeCartItem(id)"></i></td>
+                            </tr>
+                        </table> 
+                        <a class="btn btn-xs btn-success">Proceed to checkout</a>                       
                     </div>
                 </li>
             </ul>
@@ -45,19 +57,25 @@
     import { mapGetters, mapActions } from 'vuex'
     export default {        
         data() {
-            return {                
-
+            return {
             };
         },
 
         mounted() {
-            this.$store.dispatch('getUser');
+            this.$store.dispatch('authModule/getUser');
+            this.$store.dispatch('cartModule/initCart');
         },
         computed: mapGetters({
-            isLoggedIn:'isLoggedIn',
-            user:'user'
+            isLoggedIn:'authModule/isLoggedIn',
+            user:'authModule/user',
+            cartItems:'cartModule/cartItems',
+            cartItemCount:'cartModule/itemCount',
+            cartTotalAmount:'cartModule/totalAmount'
         }),
         methods: {
+            ...mapActions({
+                'removeCartItem':'cartModule/removeCartItem'
+            }),
             logout() {
                 this.$store.dispatch('logout');
             }

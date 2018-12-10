@@ -16,7 +16,7 @@
         },
         created() {
             let store=this.$store;
-            store.dispatch('checkLogin');
+            store.dispatch('authModule/checkLogin');
             this.$http.interceptors.response.use(undefined, function (err) {
                 return new Promise(function (resolve, reject) {
                     if (err.response.status === 401 && err.config && !err.config.__isRetryRequest) {

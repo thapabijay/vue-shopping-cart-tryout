@@ -35,12 +35,10 @@
 
 <script>
 export default {
-    data() {
-        return{
+    data:()=>({
             username: '',
             password: ''
-        }
-    },
+    }),
 
     methods: {
         login(e) {

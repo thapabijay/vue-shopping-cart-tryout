@@ -1,10 +1,12 @@
 import * as MutationTypes from './mutation-types'
+import loginService from '../../api/Account'
 
 export default {
     login({commit},user){
         return new Promise((resolve, reject) => {
             commit(MutationTypes.AUTH_REQUEST)
-            axios({url: '/api/login', data: user, method: 'POST' })
+            loginService.login(user)
+            //axios({url: '/api/login', data: user, method: 'POST' })
             .then(resp => {
               const token = resp.data.token
               localStorage.setItem("larvue",JSON.stringify(resp.data));
@@ -18,8 +20,6 @@ export default {
               reject(err)
             })
           })
-        //localStorage.setItem("larvue",JSON.stringify(obj));
-        //commit(MutationTypes.LOGIN,obj);
     },
     logout({ commit }) {
         return new Promise((resolve, reject) => {

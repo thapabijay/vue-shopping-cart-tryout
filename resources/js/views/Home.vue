@@ -5,17 +5,18 @@
         <img :src="banner" />
       </slide>
     </carousel>
+    <product/>
   </div>
 </template>
 <script>
   import { Carousel, Slide } from 'vue-carousel';
+
+  import Product from "../components/Product";
+
+  import homeService from '../api/Home';
   
-  import axios from 'axios';
-
   const getPhotos = (callback) => {
-
-    axios
-        .get('/api/photos')
+    homeService.getPhotos()
         .then(response => {
             callback(null, response.data);
         }).catch(error => {
@@ -39,14 +40,15 @@
     },
     components:{
       Carousel,
-      Slide
+      Slide,
+      Product
     },
     methods:{
       setData(err, data) {
             if (err) {
                 this.error = err.toString();
             } else {
-                this.carouselImages = data
+                this.carouselImages = data;
             }
         },
     }

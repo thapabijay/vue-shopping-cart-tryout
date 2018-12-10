@@ -1,0 +1,5 @@
+export const INIT = 'INIT'
+export const ADD = 'ADD'
+export const REMOVE = 'REMOVE'
+export const UPDATE = 'UPDATE'
+export const CLEAR = 'CLEAR'

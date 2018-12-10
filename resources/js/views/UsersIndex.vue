@@ -29,7 +29,6 @@ import axios from 'axios';
 
 const getUsers = (page, callback) => {
     const params = { page };
-
     axios
         .get('/api/users', { params })
         .then(response => {

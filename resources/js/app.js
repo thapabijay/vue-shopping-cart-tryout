@@ -43,11 +43,11 @@ Vue.use(VeeValidate);
 
 Vue.prototype.$http = axios
 
-import authStore from './store'
+import authModule from './store'
 
-Vue.component('passport-clients', require('./components/passport/Clients.vue'));
-Vue.component('passport-authorized-clients', require('./components/passport/AuthorizedClients.vue'));
-Vue.component('passport-personal-access-tokens', require('./components/passport/PersonalAccessTokens.vue'));
+// Vue.component('passport-clients', require('./components/passport/Clients.vue'));
+// Vue.component('passport-authorized-clients', require('./components/passport/AuthorizedClients.vue'));
+// Vue.component('passport-personal-access-tokens', require('./components/passport/PersonalAccessTokens.vue'));
 
 import Default from "./layouts/Default.vue";
 
@@ -55,7 +55,7 @@ Vue.component("default-layout", Default);
 
 const app = new Vue({
     el: '#app',
-    store:authStore,
+    store:authModule,
     router,    
     render: h => h(App),    
 });
