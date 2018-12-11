@@ -49,11 +49,11 @@ export default {
                         password: this.password
                     };
 
-                    this.$store.dispatch('login',data)
-                        .then(({data}) => {
+                    this.$store.dispatch('authModule/login',data)
+                        .then((data) => {
                             this.$router.push('/');
                         })
-                        .catch(({error}) => {
+                        .catch((error) => {
                             console.log(error);
                         }
                     );

@@ -12,9 +12,9 @@ export default {
         state.user=obj.user;
     },
     [MutationTypes.AUTH_ERROR] (state) {
-        state.isLoggedIn = true;
+        state.isLoggedIn = false;
         state.pending = false;
-        state.user=obj.user;
+        state.user=null;
     },
     [MutationTypes.LOGOUT](state) {
         state.isLoggedIn = false;

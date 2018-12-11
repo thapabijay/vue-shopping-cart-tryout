@@ -23,11 +23,10 @@ export default {
                 cartObj=JSON.parse(cartObj);
                 let sameItem=cartObj.find(x=>x.id==product.id);
                 if(sameItem){
-                    product.quantity=product.quantity+sameItem.quantity;
-                    product.total_amount=product.quantity*product.amount;
-                    cartObj.splice(cartObj.findIndex(function(i){
-                        return i.id === product.id;
-                    }), 1,product);
+                    //product.quantity required for quantity validation
+                    product.quantity+=sameItem.quantity;
+                    sameItem.quantity=product.quantity;
+                    sameItem.total_amount=product.quantity*product.amount;
                 }
                 else{
                     cartObj.push(product);

@@ -6,7 +6,6 @@ export default {
         return new Promise((resolve, reject) => {
             commit(MutationTypes.AUTH_REQUEST)
             loginService.login(user)
-            //axios({url: '/api/login', data: user, method: 'POST' })
             .then(resp => {
               const token = resp.data.token
               localStorage.setItem("larvue",JSON.stringify(resp.data));

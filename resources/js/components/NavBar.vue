@@ -36,7 +36,7 @@
                         <a class="dropdown-item">No Item</a>
                     </div>
                     <div v-else class="dropdown-menu dropdown-menu-right cart-drp" aria-labelledby="cart-list" @click="preventClose($event)">
-                        <a class="btn btn-xs btn-danger" @click="clearCart"><i class="fas fa-times"></i> Clear Cart</a>
+                        <a class="btn btn-xs btn-danger float-right" @click="clearCart"><i class="fas fa-times"></i> Clear Cart</a>
                         <div class="dropdown-divider"></div>
                         <table class="table table-sm table-condensed table-striped table-nowrap table-bordered">
                             <tr>
@@ -53,7 +53,7 @@
                             </tr>
                         </table>
                         <div class="dropdown-divider"></div>
-                        <a class="btn btn-xs btn-success">Proceed to checkout</a>                       
+                        <a class="btn btn-xs btn-success float-right">Proceed to checkout</a>                       
                     </div>
                 </li>
             </ul>
