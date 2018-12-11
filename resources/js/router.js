@@ -23,6 +23,12 @@ let router= new Router({
             component: require('./views/Logout.vue')
         },
         {
+            path: '/product-detail/:id',
+            name: 'product-detail',
+            props:true,
+            component: require('./views/ProductDetail')
+        },
+        {
             path: '/hello',
             name: 'hello',
             component: require('./views/Hello')

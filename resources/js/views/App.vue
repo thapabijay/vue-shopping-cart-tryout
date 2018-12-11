@@ -8,8 +8,8 @@
 
 <script>
     const default_layout = "default";
-    export default {
-    computed: {
+    export default {        
+        computed: {
             layout() {
                 return (this.$route.meta.layout || default_layout) + "-layout";
             }

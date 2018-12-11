@@ -35,16 +35,24 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item">No Item</a>
                     </div>
-                    <div v-else class="dropdown-menu dropdown-menu-right" aria-labelledby="cart-list">
+                    <div v-else class="dropdown-menu dropdown-menu-right cart-drp" aria-labelledby="cart-list" @click="preventClose($event)">
+                        <a class="btn btn-xs btn-danger" @click="clearCart"><i class="fas fa-times"></i> Clear Cart</a>
                         <div class="dropdown-divider"></div>
-                        <table class="table table-sm table-condensed table-striped">
-                            <tr v-for="{id,name,quantity,amount,img_url} in cartItems">
+                        <table class="table table-sm table-condensed table-striped table-nowrap table-bordered">
+                            <tr>
+                                <td>Item</td>
+                                <td>Qty</td>
+                                <td>Amount</td>
+                                <td></td>
+                            </tr>
+                            <tr v-for="{id,name,quantity,amount,total_amount,img_url} in cartItems">
                                 <td>{{name}}</td>
-                                <td>{{quantity}}</td>
-                                <td>{{amount}}</td>
+                                <td><i class="fas fa-minus-circle" @click="updateItemQuantity(id,-1)"></i> {{quantity}} <i class="fas fa-plus-circle" @click="updateItemQuantity(id,1)"></i></td>
+                                <td class="text-right">$ {{total_amount| money}}</td>
                                 <td><i class="fas fa-trash-alt" @click="removeCartItem(id)"></i></td>
                             </tr>
-                        </table> 
+                        </table>
+                        <div class="dropdown-divider"></div>
                         <a class="btn btn-xs btn-success">Proceed to checkout</a>                       
                     </div>
                 </li>
@@ -64,6 +72,7 @@
         mounted() {
             this.$store.dispatch('authModule/getUser');
             this.$store.dispatch('cartModule/initCart');
+            
         },
         computed: mapGetters({
             isLoggedIn:'authModule/isLoggedIn',
@@ -74,8 +83,17 @@
         }),
         methods: {
             ...mapActions({
-                'removeCartItem':'cartModule/removeCartItem'
+                'removeCartItem':'cartModule/removeCartItem',
+                'clearCart':'cartModule/clearCart'
             }),
+            updateItemQuantity(p_id,qty){
+                let newItem={...Object.assign(this.cartItems.find(x=>x.id==p_id),{})};
+                newItem.quantity=qty;
+                this.$store.dispatch('cartModule/addToCart',newItem);
+            },
+            preventClose(ev){
+                ev.stopPropagation();
+            },
             logout() {
                 this.$store.dispatch('logout');
             }

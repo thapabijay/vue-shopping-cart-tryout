@@ -16,5 +16,8 @@ export default {
                 return total + (p.price * p.quantity);
             }, 0);
         }
+    },
+    [MutationTypes.ADD_ERROR] (state,products) {
+
     }
 }

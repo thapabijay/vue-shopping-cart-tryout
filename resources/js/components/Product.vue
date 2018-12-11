@@ -5,10 +5,10 @@
         </div>
         <div class="product-wrapper">
             <div class="product-container">
-                <div class="itm-container" v-for="{id,name,description,amount,img_url} in items">
-                    <div class="itm-name">{{name}}</div>
-                    <div class="itm-price">{{amount}}</div>
-                    <a class="btn btn-sm btn-success" @click="addToCart(id)">Add to cart</a>
+                <div class="itm-container" v-for="item in items" v-bind:key="item.id" @click="goToDetail(item.id)">
+                    <div class="itm-name">{{item.name}}</div>
+                    <div class="itm-price">{{item.amount}}</div>
+                    <a class="btn btn-sm btn-success" @click="addToCart(item.id,$event)">Add to cart</a>
                 </div>
             </div>
         </div>
@@ -90,10 +90,17 @@
             });
         },
         methods: {
-            addToCart(p_id){
+            addToCart(p_id,ev){
+                ev.stopPropagation();
                 let newItem=this.items.find(x=>x.id==p_id);
                 newItem.quantity=1;
                 this.$store.dispatch('cartModule/addToCart',newItem);
+            },
+            goToDetail(p_id){
+                this.$router.push({
+                    name:'product-detail',
+                    params:{id:p_id}
+                });
             },
             goToNext() {
                 this.$router.push({

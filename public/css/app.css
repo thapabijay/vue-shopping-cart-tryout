@@ -10556,3 +10556,11 @@ nav.navbar-custom {
   }
 }
 
+.cart-drp {
+  padding: 5px 10px;
+}
+
+.table-nowrap {
+  white-space: nowrap;
+}
+
